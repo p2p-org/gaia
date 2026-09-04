@@ -12,11 +12,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v3.3.0
+                uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
             -   name: set tag env
                 run: echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
             -   name: install go
-                uses: actions/setup-go@v3
+                uses: actions/setup-go@be3c94b385c4f180051c996d336f57a34c397495 # v3
                 with:
                     go-version: '1.18'
                     check-latest: true
@@ -26,7 +26,7 @@ jobs:
                 run: go run ./contrib/generate_release_note/main.go ${{ env.VERSION }} ./artifacts/build_report ./CHANGELOG.md
             -   name: Create Release
                 id: create_release
-                uses: actions/create-release@v1
+                uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # v1
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 with:
@@ -36,7 +36,7 @@ jobs:
                     draft: true
                     prerelease: false
             -   name: Upload build_report
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -45,7 +45,7 @@ jobs:
                     asset_name: build_report
                     asset_content_type: application/file
             -   name: Upload darwin-amd64 artifact
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -54,7 +54,7 @@ jobs:
                     asset_name: gaiad-${{ env.VERSION }}-darwin-amd64
                     asset_content_type: application/binary
             -   name: Upload darwin-arm64 artifact
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -63,7 +63,7 @@ jobs:
                     asset_name: gaiad-${{ env.VERSION }}-darwin-arm64
                     asset_content_type: application/binary
             -   name: Upload linux-amd64 artifact
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -72,7 +72,7 @@ jobs:
                     asset_name: gaiad-${{ env.VERSION }}-linux-amd64
                     asset_content_type: application/binary
             -   name: Upload linux-arm64 artifact
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -81,7 +81,7 @@ jobs:
                     asset_name: gaiad-${{ env.VERSION }}-linux-arm64
                     asset_content_type: application/binary
             -   name: Upload windows-amd64 artifact
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
@@ -90,7 +90,7 @@ jobs:
                     asset_name: gaiad-${{ env.VERSION }}-windows-amd64.exe
                     asset_content_type: application/binary
             -   name: Upload compression
-                uses: actions/upload-release-asset@v1
+                uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
                 env:
                     GITHUB_TOKEN: ${{ github.token }}
                 with:
