@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write # gh-pages branch deploy
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
