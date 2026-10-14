@@ -18,21 +18,21 @@ jobs:
     if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
-      - uses: rokroskar/workflow-run-cleanup-action@master
+      - uses: rokroskar/workflow-run-cleanup-action@c631227427d0452af4994af0940d7655ebc50c7c # master
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
   test-coverage-upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: technote-space/get-diff-action@v6.1.1
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - uses: technote-space/get-diff-action@f0f3d5a69b811ac8d4f2d4497399930ef30f661b # v6.1.1
         with:
           PATTERNS: |
             **/**.go
             go.mod
             go.sum
-      - uses: actions/cache@v3.2.0
+      - uses: actions/cache@c17f4bf4666a8001b1a45c09eb7a485c41aa64c3 # v3.2.0
         with:
           path: |
             ~/.cache/go-build
@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.mod') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - uses: actions/setup-go@v3.3.1
+      - uses: actions/setup-go@c4a742cab115ed795e34d4513e2cf7d472deb55f # v3.3.1
         with:
           go-version: 1.18
       - name: test & coverage report creation
@@ -59,7 +59,7 @@ jobs:
             filename=$(echo "$filename" | sed 's/\//\\\//g')
             sed -i.bak "/""$filename""/d" coverage.txt
           done
-      - uses: codecov/codecov-action@v3.1.1
+      - uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 # v3.1.1
         with:
           file: ./coverage.txt
           fail_ci_if_error: true
@@ -68,11 +68,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/setup-go@v3.0.0
+      - uses: actions/setup-go@f6164bd8c8acb4a71fb2791a8b6c4024ff038dab # v3.0.0
         with:
           go-version: 1.18
-      - uses: actions/checkout@v3.3.0
-      - uses: technote-space/get-diff-action@v6.0.1
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - uses: technote-space/get-diff-action@832a70d288f9623f9af054e9f5d8f52df7492c0a # v6.0.1
         with:
           PATTERNS: |
             **/**.go
@@ -87,11 +87,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: actions/setup-go@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - uses: actions/setup-go@be3c94b385c4f180051c996d336f57a34c397495 # v3
         with:
           go-version: 1.18
-      - uses: technote-space/get-diff-action@v6.0.1
+      - uses: technote-space/get-diff-action@832a70d288f9623f9af054e9f5d8f52df7492c0a # v6.0.1
         with:
           PATTERNS: |
             **/**.go
@@ -114,13 +114,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@be3c94b385c4f180051c996d336f57a34c397495 # v3
         with:
           go-version: 1.18
-      - uses: technote-space/get-diff-action@v6.0.1
+      - uses: technote-space/get-diff-action@832a70d288f9623f9af054e9f5d8f52df7492c0a # v6.0.1
         with:
           PATTERNS: |
             **/**.go
